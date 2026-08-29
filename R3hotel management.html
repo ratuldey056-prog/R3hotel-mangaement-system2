@@ -1,0 +1,5512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>R3hotelmanagement — Hotel & Shop Management</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Arial,sans-serif
+}
+
+body{
+    background:#f4f4f4;
+    color:#111
+}
+
+.hidden{
+    display:none!important
+}
+
+button{
+    cursor:pointer
+}
+
+.red{
+    color:#e50914
+}
+
+/* NAVBAR */
+
+nav{
+    height:70px;
+    background:#080808;
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 6%;
+    position:fixed;
+    top:0;
+    width:100%;
+    z-index:20
+}
+
+.logo{
+    font-size:25px;
+    font-weight:800
+}
+
+.logo span{
+    color:#e50914
+}
+
+.navlinks{
+    display:flex;
+    gap:25px;
+    list-style:none
+}
+
+.navlinks a{
+    color:#fff;
+    text-decoration:none;
+    cursor:pointer
+}
+
+.navlinks a:hover{
+    color:#e50914
+}
+
+.navbtn{
+    display:flex;
+    gap:8px
+}
+
+.navbtn button,
+.hero button,
+.cta button,
+.primary{
+    padding:11px 18px;
+    border-radius:5px;
+    font-weight:700;
+    border:0
+}
+
+.login{
+    background:transparent;
+    color:#fff;
+    border:1px solid #fff!important
+}
+
+.primary,
+.hero button,
+.cta button{
+    background:#e50914;
+    color:#fff
+}
+
+/* HERO */
+
+.hero{
+    min-height:100vh;
+    padding:130px 7% 70px;
+    display:flex;
+    align-items:center;
+    color:#fff;
+    background:
+    linear-gradient(#000b,#000b),
+    url("https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1800&q=85")
+    center/cover
+}
+
+.hero div{
+    max-width:760px
+}
+
+.hero h1{
+    font-size:clamp(45px,6vw,78px);
+    line-height:1.03;
+    margin-bottom:25px
+}
+
+.hero p{
+    font-size:19px;
+    line-height:1.7;
+    color:#ddd;
+    margin-bottom:30px
+}
+
+/* SECTIONS */
+
+section{
+    padding:85px 7%
+}
+
+.about{
+    background:#fff
+}
+
+.sectiontitle{
+    text-align:center;
+    margin-bottom:45px
+}
+
+.sectiontitle h2{
+    font-size:38px;
+    margin-bottom:10px
+}
+
+.sectiontitle p{
+    color:#666
+}
+
+/* ABOUT */
+
+.aboutgrid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:45px;
+    align-items:center
+}
+
+.aboutgrid img{
+    width:100%;
+    height:390px;
+    object-fit:cover;
+    border-radius:12px
+}
+
+.aboutgrid p{
+    color:#555;
+    line-height:1.8;
+    margin:15px 0
+}
+
+/* FEATURES */
+
+.featuregrid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px
+}
+
+.card{
+    background:#fff;
+    padding:27px;
+    border-radius:10px;
+    border-top:4px solid #e50914;
+    box-shadow:0 5px 20px #0000000b
+}
+
+.card h3{
+    margin:10px 0
+}
+
+.card p{
+    color:#666;
+    line-height:1.6
+}
+
+/* FEEDBACK */
+
+.feedback{
+    background:#fff
+}
+
+.feedbackbox{
+    max-width:700px;
+    margin:auto;
+    background:#f5f5f5;
+    padding:30px;
+    border-radius:10px
+}
+
+input,
+select,
+textarea{
+    width:100%;
+    padding:12px;
+    border:1px solid #ccc;
+    border-radius:5px;
+    outline:0
+}
+
+textarea{
+    min-height:100px;
+    resize:vertical
+}
+
+.field{
+    margin-bottom:15px
+}
+
+.field label{
+    display:block;
+    font-weight:700;
+    font-size:14px;
+    margin-bottom:7px
+}
+
+.stars{
+    display:flex;
+    gap:6px;
+    margin:10px 0 20px
+}
+
+.stars button{
+    background:#111;
+    color:#fff;
+    border:0;
+    padding:8px 12px;
+    border-radius:4px
+}
+
+.stars .sel{
+    background:#e50914
+}
+
+/* CTA */
+
+.cta{
+    background:#080808;
+    color:#fff;
+    text-align:center
+}
+
+.cta p{
+    color:#bbb;
+    margin:12px 0 25px
+}
+
+footer{
+    background:#050505;
+    color:#aaa;
+    text-align:center;
+    padding:25px
+}
+
+footer span{
+    color:#e50914
+}
+
+/* MODALS */
+
+.modal{
+    position:fixed;
+    inset:0;
+    background:#000b;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index:50;
+    padding:20px
+}
+
+.modal.open{
+    display:flex
+}
+
+.modalbox{
+    background:#fff;
+    width:min(560px,100%);
+    max-height:92vh;
+    overflow:auto;
+    padding:30px;
+    border-radius:10px;
+    position:relative
+}
+
+.close{
+    position:absolute;
+    right:18px;
+    top:10px;
+    font-size:28px
+}
+
+.modalbox h2{
+    margin-bottom:22px
+}
+
+/* DASHBOARD */
+
+#dashboard{
+    padding-top:70px;
+    min-height:100vh
+}
+
+.dash{
+    display:flex;
+    min-height:calc(100vh - 70px)
+}
+
+.side{
+    width:240px;
+    background:#080808;
+    color:#fff;
+    padding:20px 13px;
+    flex-shrink:0
+}
+
+.side h2{
+    padding:12px;
+    border-bottom:1px solid #333;
+    margin-bottom:12px
+}
+
+.side button{
+    width:100%;
+    background:transparent;
+    border:0;
+    color:#ddd;
+    text-align:left;
+    padding:13px;
+    border-radius:5px;
+    margin:2px 0
+}
+
+.side button:hover,
+.side button.active{
+    background:#e50914;
+    color:#fff
+}
+
+.main{
+    padding:30px;
+    flex:1;
+    overflow:auto
+}
+
+.top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:25px
+}
+
+.logout{
+    background:#111;
+    color:#fff;
+    border:0;
+    padding:10px 16px;
+    border-radius:5px
+}
+
+/* STATS */
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:15px;
+    margin-bottom:25px
+}
+
+.stat{
+    background:#fff;
+    border-left:5px solid #e50914;
+    padding:20px;
+    border-radius:7px
+}
+
+.stat small{
+    color:#777
+}
+
+.stat h2{
+    margin-top:8px
+}
+
+/* TABLES */
+
+.panel{
+    background:#fff;
+    padding:22px;
+    border-radius:8px;
+    margin-bottom:20px
+}
+
+.panelhead{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:18px
+}
+
+.tablewrap{
+    overflow:auto
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:720px
+}
+
+th,
+td{
+    padding:12px;
+    border-bottom:1px solid #eee;
+    text-align:left
+}
+
+th{
+    background:#111;
+    color:#fff
+}
+
+/* TAGS */
+
+.tag{
+    display:inline-block;
+    padding:5px 9px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:700
+}
+
+.good{
+    background:#dff6e4;
+    color:#16852b
+}
+
+.bad{
+    background:#ffe0e0;
+    color:#c00000
+}
+
+.warn{
+    background:#fff0c7;
+    color:#966500
+}
+
+.muted{
+    background:#e5e5e5;
+    color:#555
+}
+
+.action{
+    border:0;
+    background:#111;
+    color:#fff;
+    padding:7px 10px;
+    border-radius:4px;
+    margin:2px
+}
+
+.action:hover{
+    background:#e50914
+}
+
+/* STAFF */
+
+.staffgrid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px
+}
+
+.staffcard{
+    background:#fff;
+    border-radius:10px;
+    overflow:hidden;
+    border:1px solid #ddd
+}
+
+.staffcard img{
+    width:100%;
+    height:190px;
+    object-fit:cover;
+    background:#ddd
+}
+
+.staffinfo{
+    padding:17px
+}
+
+.staffinfo p{
+    color:#666;
+    margin:7px 0;
+    font-size:14px
+}
+
+/* SHOP */
+
+.shopgrid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px
+}
+
+.shopcard{
+    background:#fff;
+    border:1px solid #ddd;
+    border-radius:9px;
+    padding:20px
+}
+
+.shopcard h3{
+    margin-bottom:8px
+}
+
+.shopcard p{
+    color:#666;
+    margin:7px 0
+}
+
+/* PHOTO */
+
+.photo-preview{
+    width:100%;
+    height:160px;
+    object-fit:cover;
+    border-radius:7px;
+    background:#eee;
+    margin-bottom:12px
+}
+
+/* DISCLAIMER */
+
+.disclaimer{
+    background:#fff1f1;
+    padding-top:55px;
+    padding-bottom:55px
+}
+
+.smallbtn{
+    padding:7px 10px;
+    border:0;
+    border-radius:4px;
+    background:#111;
+    color:#fff;
+    margin:2px
+}
+
+.smallbtn:hover{
+    background:#e50914
+}
+
+.empty{
+    padding:25px;
+    text-align:center;
+    color:#777
+}
+
+/* RESPONSIVE */
+
+@media(max-width:1000px){
+
+    .featuregrid,
+    .staffgrid,
+    .shopgrid{
+        grid-template-columns:1fr 1fr
+    }
+
+    .stats{
+        grid-template-columns:repeat(2,1fr)
+    }
+
+}
+
+@media(max-width:750px){
+
+    .navlinks{
+        display:none
+    }
+
+    .aboutgrid{
+        grid-template-columns:1fr
+    }
+
+    .side{
+        width:70px
+    }
+
+    .side h2{
+        font-size:0
+    }
+
+    .side button{
+        font-size:0;
+        text-align:center
+    }
+
+    .side button:first-letter{
+        font-size:20px
+    }
+
+    .main{
+        padding:18px
+    }
+
+    .featuregrid,
+    .staffgrid,
+    .shopgrid{
+        grid-template-columns:1fr
+    }
+
+    .stats{
+        grid-template-columns:1fr
+    }
+
+    .top{
+        gap:12px
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- ================= LANDING PAGE ================= -->
+
+<div id="landing">
+
+<nav>
+
+<div class="logo">
+R3<span>hotelmanagement</span>
+</div>
+
+<ul class="navlinks">
+
+<li>
+<a onclick="go('home')">Home</a>
+</li>
+
+<li>
+<a onclick="go('about')">About</a>
+</li>
+
+<li>
+<a onclick="go('features')">Features</a>
+</li>
+
+<li>
+<a onclick="go('feedback')">Feedback</a>
+</li>
+
+</ul>
+
+<div class="navbtn">
+
+<button class="login" onclick="auth('in')">
+Sign In
+</button>
+
+<button class="primary" onclick="auth('up')">
+Sign Up
+</button>
+
+</div>
+
+</nav>
+
+
+<!-- HERO -->
+
+<section class="hero" id="home">
+
+<div>
+
+<h1>
+Manage Your Hotel
+<span class="red">Smarter.</span>
+</h1>
+
+<p>
+One centralized demo platform for rooms, staff,
+housekeeping, salaries, inventory, purchasing,
+suppliers and your hotel shop.
+</p>
+
+<button onclick="auth('up')">
+Create Demo Account
+</button>
+
+</div>
+
+</section>
+
+
+<!-- DISCLAIMER -->
+
+<section class="disclaimer">
+
+<div class="sectiontitle">
+
+<h2>
+⚠️ Demo Version
+<span class="red">Disclaimer</span>
+</h2>
+
+</div>
+
+<div class="feedbackbox"
+style="border-left:5px solid #e50914;background:#fff8f8">
+
+<p style="line-height:1.8;color:#444">
+
+<b>
+R3hotelmanagement is currently a demonstration/prototype software.
+</b>
+
+This version is made for learning, testing and portfolio presentation.
+It is <b>not a production-ready hotel management system</b>
+and should not be used to manage real hotel operations,
+payments, employees or customer information.
+
+</p>
+
+<p style="line-height:1.8;color:#444;margin-top:12px">
+
+Some features may contain errors or limitations because this is
+a single-file frontend demo.
+
+Data is stored locally in the browser for demonstration purposes.
+
+A more complete and genuinely useful version with a proper
+backend, database, secure authentication and reliable real-world
+functionality is planned for the future.
+
+</p>
+
+</div>
+
+</section>
+
+
+<!-- ABOUT -->
+
+<section class="about" id="about">
+
+<div class="sectiontitle">
+
+<h2>
+About <span class="red">R3hotelmanagement</span>
+</h2>
+
+<p>
+A complete hotel operations prototype.
+</p>
+
+</div>
+
+<div class="aboutgrid">
+
+<img
+src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?auto=format&fit=crop&w=1000&q=85"
+>
+
+<div>
+
+<h2>
+Everything in one place
+</h2>
+
+<p>
+R3hotelmanagement brings everyday hotel management tasks
+into one clean dashboard.
+Managers can monitor rooms, staff, housekeeping,
+inventory, salaries, supplier contacts and purchasing requirements.
+</p>
+
+<p>
+The Shop Management module also tracks shop staff,
+products, stock shortages and customer suggestions
+for new products.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- FEATURES -->
+
+<section id="features">
+
+<div class="sectiontitle">
+
+<h2>
+Powerful <span class="red">Features</span>
+</h2>
+
+<p>
+Built as a realistic portfolio prototype.
+</p>
+
+</div>
+
+<div class="featuregrid">
+
+<div class="card">
+
+🛏️
+
+<h3>
+Room Management
+</h3>
+
+<p>
+Add rooms, change prices and track available,
+occupied, cleaning and maintenance status.
+</p>
+
+</div>
+
+
+<div class="card">
+
+👥
+
+<h3>
+Staff Management
+</h3>
+
+<p>
+Staff photos, roles, shifts, duties, phone numbers,
+salaries and payment status.
+</p>
+
+</div>
+
+
+<div class="card">
+
+🧹
+
+<h3>
+Housekeeping
+</h3>
+
+<p>
+Assign room cleaning tasks and see which rooms are ready.
+</p>
+
+</div>
+
+
+<div class="card">
+
+📦
+
+<h3>
+Inventory
+</h3>
+
+<p>
+Track towels, bedsheets, toiletries, food, drinks,
+cleaning supplies and electronics.
+</p>
+
+</div>
+
+
+<div class="card">
+
+🛒
+
+<h3>
+Orders & Suppliers
+</h3>
+
+<p>
+Save salesman/factory contacts and create demo purchase orders.
+</p>
+
+</div>
+
+
+<div class="card">
+
+🏪
+
+<h3>
+Shop Management
+</h3>
+
+<p>
+Manage shop staff, products, low stock and customer
+product suggestions.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- FEEDBACK -->
+
+<section class="feedback" id="feedback">
+
+<div class="sectiontitle">
+
+<h2>
+Guest <span class="red">Feedback</span>
+</h2>
+
+<p>
+Tell us how the hotel management experience can improve.
+</p>
+
+</div>
+
+<div class="feedbackbox">
+
+<div class="field">
+
+<label>
+Name
+</label>
+
+<input
+id="fbName"
+placeholder="Your name"
+>
+
+</div>
+
+
+<div class="field">
+
+<label>
+Feedback
+</label>
+
+<textarea
+id="fbText"
+placeholder="Write your feedback..."
+></textarea>
+
+</div>
+
+
+<label>
+<b>Rating</b>
+</label>
+
+<div class="stars" id="stars">
+
+<button onclick="rate(1)">1</button>
+<button onclick="rate(2)">2</button>
+<button onclick="rate(3)">3</button>
+<button onclick="rate(4)">4</button>
+<button onclick="rate(5)">5</button>
+
+</div>
+
+<button class="primary" onclick="feedback()">
+Submit Feedback
+</button>
+
+</div>
+
+</section>
+
+
+<!-- CTA -->
+
+<section class="cta">
+
+<h2>
+Ready to manage smarter?
+</h2>
+
+<p>
+Open the demo dashboard and explore every module.
+</p>
+
+<button onclick="auth('up')">
+Start Demo
+</button>
+
+</section>
+
+
+<footer>
+
+© 2026
+<span>R3hotelmanagement</span>
+—
+Hotel & Shop Management System Demo
+
+</footer>
+
+</div>
+
+
+<!-- ================= AUTH MODAL ================= -->
+
+<div class="modal" id="authModal">
+
+<div class="modalbox">
+
+<span class="close" onclick="closeM('authModal')">
+×
+</span>
+
+
+<!-- SIGN UP -->
+
+<div id="signup">
+
+<h2>
+Create Hotel Account
+</h2>
+
+
+<div class="field">
+
+<label>
+Hotel Name
+</label>
+
+<input
+id="hotel"
+placeholder="Grand Horizon Hotel"
+>
+
+</div>
+
+
+<div class="field">
+
+<label>
+Hotel Type
+</label>
+
+<select id="hotelType">
+
+<option>Luxury Hotel</option>
+<option>Business Hotel</option>
+<option>Resort</option>
+<option>Boutique Hotel</option>
+<option>Budget Hotel</option>
+
+</select>
+
+</div>
+
+
+<div class="field">
+
+<label>
+Owner / Manager Name
+</label>
+
+<input
+id="manager"
+placeholder="Name"
+>
+
+</div>
+
+
+<div class="field">
+
+<label>
+Hotel Mobile
+</label>
+
+<input
+id="mobile"
+placeholder="Mobile number"
+>
+
+</div>
+
+
+<div class="field">
+
+<label>
+Hotel Email
+</label>
+
+<input
+id="email"
+type="email"
+placeholder="hotel@example.com"
+>
+
+</div>
+
+
+<div class="field">
+
+<label>
+Hotel Address
+</label>
+
+<input
+id="address"
+placeholder="Full address"
+>
+
+</div>
+
+
+<div class="field">
+
+<label>
+City
+</label>
+
+<input
+id="city"
+placeholder="City"
+>
+
+</div>
+
+
+<div class="field">
+
+<label>
+Total Rooms
+</label>
+
+<input
+id="rooms"
+type="number"
+placeholder="30"
+>
+
+</div>
+
+
+<div class="field">
+
+<label>
+Password
+</label>
+
+<input
+id="pass"
+type="password"
+>
+
+</div>
+
+
+<div class="field">
+
+<label>
+Confirm Password
+</label>
+
+<input
+id="pass2"
+type="password"
+>
+
+</div>
+
+
+<button
+class="primary"
+style="width:100%"
+onclick="signup()"
+>
+
+Create Account
+
+</button>
+
+
+<p style="text-align:center;margin-top:15px">
+
+Already registered?
+
+<span
+class="red"
+style="cursor:pointer"
+onclick="auth('in')"
+>
+
+Sign In
+
+</span>
+
+</p>
+
+</div>
+
+
+<!-- SIGN IN -->
+
+<div id="signin" class="hidden">
+
+<h2>
+Hotel Sign In
+</h2>
+
+
+<div class="field">
+
+<label>
+Hotel ID
+</label>
+
+<input
+id="loginId"
+placeholder="GS-1234"
+>
+
+</div>
+
+
+<div class="field">
+
+<label>
+Email / Mobile
+</label>
+
+<input id="loginUser">
+
+</div>
+
+
+<div class="field">
+
+<label>
+Role
+</label>
+
+<select id="loginRole">
+
+<option>Owner</option>
+<option>Manager</option>
+<option>Receptionist</option>
+<option>Accountant</option>
+
+</select>
+
+</div>
+
+
+<div class="field">
+
+<label>
+Password
+</label>
+
+<input
+id="loginPass"
+type="password"
+>
+
+</div>
+
+
+<div class="field">
+
+<label>
+Security PIN
+</label>
+
+<input
+id="pin"
+type="password"
+placeholder="Demo PIN"
+>
+
+</div>
+
+
+<button
+class="primary"
+style="width:100%"
+onclick="signin()"
+>
+
+Sign In
+
+</button>
+
+
+<p style="text-align:center;margin-top:15px">
+
+New hotel?
+
+<span
+class="red"
+style="cursor:pointer"
+onclick="auth('up')"
+>
+
+Create Account
+
+</span>
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- ROOM MODAL -->
+
+<div class="modal" id="roomModal">
+
+<div class="modalbox">
+
+<span
+class="close"
+onclick="closeM('roomModal')"
+>
+×
+</span>
+
+<h2>
+Add New Room
+</h2>
+
+
+<div class="field">
+
+<label>
+Room Number
+</label>
+
+<input id="rno">
+
+</div>
+
+
+<div class="field">
+
+<label>
+Type
+</label>
+
+<select id="rtype">
+
+<option>Single</option>
+<option>Double</option>
+<option>Deluxe</option>
+<option>Suite</option>
+<option>Premium Suite</option>
+
+</select>
+
+</div>
+
+
+<div class="field">
+
+<label>
+Floor
+</label>
+
+<input
+id="rfloor"
+type="number"
+>
+
+</div>
+
+
+<div class="field">
+
+<label>
+Price / Night
+</label>
+
+<input
+id="rprice"
+type="number"
+>
+
+</div>
+
+
+<button
+class="primary"
+style="width:100%"
+onclick="addRoom()"
+>
+
+Add Room
+
+</button>
+
+</div>
+
+</div>
+
+
+<!-- STAFF MODAL -->
+
+<div class="modal" id="staffModal">
+
+<div class="modalbox">
+
+<span
+class="close"
+onclick="closeM('staffModal')"
+>
+×
+</span>
+
+<h2>
+Add Staff
+</h2>
+
+
+<div class="field">
+
+<label>
+Staff Photo
+</label>
+
+<input
+id="sphoto"
+type="file"
+accept="image/*"
+onchange="previewPhoto(this)"
+>
+
+<img
+id="preview"
+class="photo-preview hidden"
+>
+
+</div>
+
+
+<div class="field">
+
+<label>
+Name
+</label>
+
+<input id="sname">
+
+</div>
+
+
+<div class="field">
+
+<label>
+Role
+</label>
+
+<select id="srole">
+
+<option>Manager</option>
+<option>Receptionist</option>
+<option>Housekeeping</option>
+<option>Cook</option>
+<option>Security</option>
+<option>Accountant</option>
+<option>Maintenance</option>
+<option>Shop Staff</option>
+
+</select>
+
+</div>
+
+
+<div class="field">
+
+<label>
+Phone
+</label>
+
+<input id="sphone">
+
+</div>
+
+
+<div class="field">
+
+<label>
+Shift
+</label>
+
+<select id="sshift">
+
+<option>Morning</option>
+<option>Evening</option>
+<option>Night</option>
+<option>Full Day</option>
+
+</select>
+
+</div>
+
+
+<div class="field">
+
+<label>
+Duty
+</label>
+
+<input id="sduty">
+
+</div>
+
+
+<div class="field">
+
+<label>
+Monthly Salary
+</label>
+
+<input
+id="ssalary"
+type="number"
+>
+
+</div>
+
+
+<button
+class="primary"
+style="width:100%"
+onclick="addStaff()"
+>
+
+Add Staff
+
+</button>
+
+</div>
+
+</div>
+
+
+<!-- SUPPLIER MODAL -->
+
+<div class="modal" id="supplierModal">
+
+<div class="modalbox">
+
+<span
+class="close"
+onclick="closeM('supplierModal')"
+>
+×
+</span>
+
+<h2>
+Save Supplier Contact
+</h2>
+
+
+<div class="field">
+
+<label>
+Company / Salesman
+</label>
+
+<input id="supname">
+
+</div>
+
+
+<div class="field">
+
+<label>
+Category
+</label>
+
+<select id="supcat">
+
+<option>Food & Beverages</option>
+<option>Linen</option>
+<option>Cleaning</option>
+<option>Electronics</option>
+<option>Toiletries</option>
+<option>Other</option>
+
+</select>
+
+</div>
+
+
+<div class="field">
+
+<label>
+Contact Person
+</label>
+
+<input id="supperson">
+
+</div>
+
+
+<div class="field">
+
+<label>
+Phone
+</label>
+
+<input id="supphone">
+
+</div>
+
+
+<button
+class="primary"
+style="width:100%"
+onclick="addSupplier()"
+>
+
+Save Contact
+
+</button>
+
+</div>
+
+</div>
+
+
+<!-- ORDER MODAL -->
+
+<div class="modal" id="orderModal">
+
+<div class="modalbox">
+
+<span
+class="close"
+onclick="closeM('orderModal')"
+>
+×
+</span>
+
+<h2>
+Create Demo Order
+</h2>
+
+
+<div class="field">
+
+<label>
+Item
+</label>
+
+<input
+id="orderitem"
+placeholder="50 bath towels"
+>
+
+</div>
+
+
+<div class="field">
+
+<label>
+Category
+</label>
+
+<select id="ordercat">
+
+<option>Food & Beverages</option>
+<option>Towels & Bedsheets</option>
+<option>Cleaning Supplies</option>
+<option>Electronics</option>
+<option>Toiletries</option>
+<option>Other</option>
+
+</select>
+
+</div>
+
+
+<div class="field">
+
+<label>
+Supplier
+</label>
+
+<input
+id="ordersup"
+placeholder="Supplier name"
+>
+
+</div>
+
+
+<div class="field">
+
+<label>
+Quantity
+</label>
+
+<input
+id="orderqty"
+type="number"
+>
+
+</div>
+
+
+<button
+class="primary"
+style="width:100%"
+onclick="createOrder()"
+>
+
+Create Order
+
+</button>
+
+</div>
+
+</div>
+
+
+<!-- PRODUCT MODAL -->
+
+<div class="modal" id="productModal">
+
+<div class="modalbox">
+
+<span
+class="close"
+onclick="closeM('productModal')"
+>
+×
+</span>
+
+<h2>
+Add Shop Product
+</h2>
+
+
+<div class="field">
+
+<label>
+Product Name
+</label>
+
+<input id="pname">
+
+</div>
+
+
+<div class="field">
+
+<label>
+Category
+</label>
+
+<select id="pcat">
+
+<option>Food</option>
+<option>Beverage</option>
+<option>Snacks</option>
+<option>Daily Use</option>
+<option>Other</option>
+
+</select>
+
+</div>
+
+
+<div class="field">
+
+<label>
+Price
+</label>
+
+<input
+id="pprice"
+type="number"
+>
+
+</div>
+
+
+<div class="field">
+
+<label>
+Stock
+</label>
+
+<input
+id="pstock"
+type="number"
+>
+
+</div>
+
+
+<div class="field">
+
+<label>
+Minimum Stock
+</label>
+
+<input
+id="pmin"
+type="number"
+>
+
+</div>
+
+
+<button
+class="primary"
+style="width:100%"
+onclick="addProduct()"
+>
+
+Add Product
+
+</button>
+
+</div>
+
+</div>
+
+
+<!-- SIMPLE MODAL -->
+
+<div class="modal" id="simpleModal">
+
+<div class="modalbox">
+
+<span
+class="close"
+onclick="closeM('simpleModal')"
+>
+×
+</span>
+
+<h2 id="simpleTitle">
+Add
+</h2>
+
+<div id="simpleBody"></div>
+
+</div>
+
+</div>
+
+
+<!-- ================= DASHBOARD ================= -->
+
+<div id="dashboard" class="hidden">
+
+<div class="dash">
+
+
+<!-- SIDEBAR -->
+
+<aside class="side">
+
+<h2>
+🏨 R3hotelmanagement
+</h2>
+
+
+<button
+class="active"
+onclick="page('overview',this)"
+>
+📊 Dashboard
+</button>
+
+
+<button
+onclick="page('roomsPage',this)"
+>
+🛏️ Rooms
+</button>
+
+
+<button
+onclick="page('bookingsPage',this)"
+>
+📅 Bookings
+</button>
+
+
+<button
+onclick="page('staffPage',this)"
+>
+👥 Management
+</button>
+
+
+<button
+onclick="page('housePage',this)"
+>
+🧹 Housekeeping
+</button>
+
+
+<button
+onclick="page('maintenancePage',this)"
+>
+🛠️ Maintenance
+</button>
+
+
+<button
+onclick="page('requestsPage',this)"
+>
+🛎️ Guest Requests
+</button>
+
+
+<button
+onclick="page('inventoryPage',this)"
+>
+📦 Inventory
+</button>
+
+
+<button
+onclick="page('salaryPage',this)"
+>
+💰 Salaries
+</button>
+
+
+<button
+onclick="page('ordersPage',this)"
+>
+🛒 Orders
+</button>
+
+
+<button
+onclick="page('suppliersPage',this)"
+>
+📞 Suppliers
+</button>
+
+
+<button
+onclick="page('shopPage',this)"
+>
+🏪 Shop Management
+</button>
+
+
+<button
+onclick="page('shopFeedbackPage',this)"
+>
+⭐ Shop Feedback
+</button>
+
+</aside>
+
+
+<!-- MAIN -->
+
+<main class="main">
+
+
+<div class="top">
+
+<div>
+
+<h1 id="title">
+Dashboard
+</h1>
+
+<p id="welcome">
+Welcome
+</p>
+
+</div>
+
+
+<button
+class="logout"
+onclick="logout()"
+>
+Logout
+</button>
+
+</div>
+
+
+<!-- DASHBOARD OVERVIEW -->
+
+<div id="overview" class="page">
+
+<div class="stats">
+
+
+<div class="stat">
+
+<small>
+Total Rooms
+</small>
+
+<h2 id="statRooms">
+30
+</h2>
+
+</div>
+
+
+<div class="stat">
+
+<small>
+Available
+</small>
+
+<h2 id="statAvailable">
+12
+</h2>
+
+</div>
+
+
+<div class="stat">
+
+<small>
+Staff
+</small>
+
+<h2 id="statStaff">
+3
+</h2>
+
+</div>
+
+
+<div class="stat">
+
+<small>
+Low Stock
+</small>
+
+<h2 id="statLow">
+3
+</h2>
+
+</div>
+
+
+<div class="stat">
+
+<small>
+Shop Staff
+</small>
+
+<h2 id="statShopStaff">
+2
+</h2>
+
+</div>
+
+
+</div>
+
+
+<div class="panel">
+
+<h2>
+Today's Overview
+</h2>
+
+<br>
+
+<div class="tablewrap">
+
+<table>
+
+<tr>
+<th>Activity</th>
+<th>Status</th>
+<th>Details</th>
+</tr>
+
+
+<tr>
+<td>
+Expected Check-ins
+</td>
+
+<td>
+8
+</td>
+
+<td>
+Today's arrivals
+</td>
+
+</tr>
+
+
+<tr>
+
+<td>
+Housekeeping
+</td>
+
+<td class="bad">
+4 pending
+</td>
+
+<td>
+Rooms require attention
+</td>
+
+</tr>
+
+
+<tr>
+
+<td>
+Salaries
+</td>
+
+<td class="bad">
+2 pending
+</td>
+
+<td>
+August 2026
+</td>
+
+</tr>
+
+
+<tr>
+
+<td>
+Shop Inventory
+</td>
+
+<td class="bad">
+3 low stock
+</td>
+
+<td>
+Restock recommended
+</td>
+
+</tr>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- ROOMS -->
+
+<div id="roomsPage" class="page hidden">
+
+<div class="panel">
+
+<div class="panelhead">
+
+<h2>
+Room Management
+</h2>
+
+<button
+class="primary"
+onclick="openM('roomModal')"
+>
++ Add Room
+</button>
+
+</div>
+
+
+<div class="tablewrap">
+
+<table id="roomTable">
+
+<tr>
+
+<th>Room</th>
+<th>Type</th>
+<th>Floor</th>
+<th>Price</th>
+<th>Status</th>
+<th>Action</th>
+
+</tr>
+
+
+<tr>
+
+<td>101</td>
+<td>Deluxe</td>
+<td>1</td>
+<td>₹3500</td>
+
+<td>
+<span class="tag good">
+Available
+</span>
+</td>
+
+<td>
+
+<button
+class="action"
+onclick="changeStatus(this)"
+>
+Status
+</button>
+
+<button
+class="action"
+onclick="changePrice(this)"
+>
+Price
+</button>
+
+<button
+class="action"
+onclick="deleteRow(this)"
+>
+Delete
+</button>
+
+</td>
+
+</tr>
+
+
+<tr>
+
+<td>102</td>
+<td>Double</td>
+<td>1</td>
+<td>₹2800</td>
+
+<td>
+<span class="tag bad">
+Occupied
+</span>
+</td>
+
+<td>
+
+<button
+class="action"
+onclick="changeStatus(this)"
+>
+Status
+</button>
+
+<button
+class="action"
+onclick="changePrice(this)"
+>
+Price
+</button>
+
+<button
+class="action"
+onclick="deleteRow(this)"
+>
+Delete
+</button>
+
+</td>
+
+</tr>
+
+
+<tr>
+
+<td>103</td>
+<td>Deluxe</td>
+<td>1</td>
+<td>₹3500</td>
+
+<td>
+<span class="tag warn">
+Cleaning
+</span>
+</td>
+
+<td>
+
+<button
+class="action"
+onclick="changeStatus(this)"
+>
+Status
+</button>
+
+<button
+class="action"
+onclick="changePrice(this)"
+>
+Price
+</button>
+
+<button
+class="action"
+onclick="deleteRow(this)"
+>
+Delete
+</button>
+
+</td>
+
+</tr>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- STAFF MANAGEMENT -->
+
+<div id="staffPage" class="page hidden">
+
+<div class="panelhead">
+
+<h2>
+Staff Management
+</h2>
+
+<button
+class="primary"
+onclick="openM('staffModal')"
+>
++ Add Staff
+</button>
+
+</div>
+
+
+<div id="staffGrid" class="staffgrid">
+
+
+<div class="staffcard">
+
+<img
+src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=600&q=80"
+>
+
+<div class="staffinfo">
+
+<h3>
+Rahul Kumar
+</h3>
+
+<p>
+<b>Role:</b> Receptionist
+</p>
+
+<p>
+<b>Shift:</b> Morning
+</p>
+
+<p>
+<b>Duty:</b> Front Desk
+</p>
+
+<p>
+<b>Salary:</b> ₹22,000
+</p>
+
+<span class="tag good">
+Active
+</span>
+
+<br>
+
+<button
+class="action"
+onclick="editStaff(this)"
+>
+Edit
+</button>
+
+<button
+class="action"
+onclick="deleteStaff(this)"
+>
+Delete
+</button>
+
+</div>
+
+</div>
+
+
+<div class="staffcard">
+
+<img
+src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=600&q=80"
+>
+
+<div class="staffinfo">
+
+<h3>
+Neha Singh
+</h3>
+
+<p>
+<b>Role:</b> Housekeeping
+</p>
+
+<p>
+<b>Shift:</b> Morning
+</p>
+
+<p>
+<b>Duty:</b> Rooms 101–105
+</p>
+
+<p>
+<b>Salary:</b> ₹18,000
+</p>
+
+<span class="tag good">
+Active
+</span>
+
+<br>
+
+<button
+class="action"
+onclick="editStaff(this)"
+>
+Edit
+</button>
+
+<button
+class="action"
+onclick="deleteStaff(this)"
+>
+Delete
+</button>
+
+</div>
+
+</div>
+
+
+<div class="staffcard">
+
+<img
+src="https://images.unsplash.com/photo-1565689157206-0fddef7589a2?auto=format&fit=crop&w=600&q=80"
+>
+
+<div class="staffinfo">
+
+<h3>
+Amit Verma
+</h3>
+
+<p>
+<b>Role:</b> Manager
+</p>
+
+<p>
+<b>Shift:</b> Full Day
+</p>
+
+<p>
+<b>Duty:</b> Operations
+</p>
+
+<p>
+<b>Salary:</b> ₹35,000
+</p>
+
+<span class="tag good">
+Active
+</span>
+
+<br>
+
+<button
+class="action"
+onclick="editStaff(this)"
+>
+Edit
+</button>
+
+<button
+class="action"
+onclick="deleteStaff(this)"
+>
+Delete
+</button>
+
+</div>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+<!-- HOUSEKEEPING -->
+
+<div id="housePage" class="page hidden">
+
+<div class="panel">
+
+<h2>
+Housekeeping & Duties
+</h2>
+
+<br>
+
+<div class="tablewrap">
+
+<table>
+
+<tr>
+
+<th>Room</th>
+<th>Staff</th>
+<th>Task</th>
+<th>Priority</th>
+<th>Status</th>
+
+</tr>
+
+
+<tr>
+
+<td>103</td>
+<td>Neha Singh</td>
+<td>Room Cleaning</td>
+<td>High</td>
+<td class="bad">
+In Progress
+</td>
+
+</tr>
+
+
+<tr>
+
+<td>205</td>
+<td>Priya Sharma</td>
+<td>Change Bedsheet</td>
+<td>Normal</td>
+<td class="good">
+Completed
+</td>
+
+</tr>
+
+
+<tr>
+
+<td>302</td>
+<td>Ravi Kumar</td>
+<td>Bathroom Cleaning</td>
+<td>Normal</td>
+<td class="bad">
+Pending
+</td>
+
+</tr>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- BOOKINGS -->
+
+<div id="bookingsPage" class="page hidden">
+
+<div class="panel">
+
+<div class="panelhead">
+
+<h2>
+Booking Management
+</h2>
+
+<button
+class="primary"
+onclick="newBooking()"
+>
++ New Booking
+</button>
+
+</div>
+
+
+<p style="color:#666;margin-bottom:18px">
+
+Demo guest reservations,
+check-in, check-out and cancellation tracking.
+
+</p>
+
+
+<div class="tablewrap">
+
+<table id="bookingTable">
+
+<tr>
+
+<th>Guest</th>
+<th>Room</th>
+<th>Check-in</th>
+<th>Check-out</th>
+<th>Guests</th>
+<th>Status</th>
+<th>Action</th>
+
+</tr>
+
+
+<tr>
+
+<td>Rahul Sharma</td>
+<td>204</td>
+<td>29 Aug</td>
+<td>31 Aug</td>
+<td>2</td>
+
+<td>
+
+<span class="tag good">
+Checked-in
+</span>
+
+</td>
+
+<td>
+
+<button
+class="action"
+onclick="cycleBooking(this)"
+>
+Status
+</button>
+
+</td>
+
+</tr>
+
+
+<tr>
+
+<td>Priya Mehta</td>
+<td>305</td>
+<td>30 Aug</td>
+<td>02 Sep</td>
+<td>3</td>
+
+<td>
+
+<span class="tag warn">
+Reserved
+</span>
+
+</td>
+
+<td>
+
+<button
+class="action"
+onclick="cycleBooking(this)"
+>
+Status
+</button>
+
+</td>
+
+</tr>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- MAINTENANCE -->
+
+<div id="maintenancePage" class="page hidden">
+
+<div class="panel">
+
+<div class="panelhead">
+
+<h2>
+Maintenance
+</h2>
+
+<button
+class="primary"
+onclick="newMaintenance()"
+>
++ Report Issue
+</button>
+
+</div>
+
+
+<div class="tablewrap">
+
+<table id="maintenanceTable">
+
+<tr>
+
+<th>Room/Area</th>
+<th>Issue</th>
+<th>Assigned Staff</th>
+<th>Priority</th>
+<th>Status</th>
+<th>Action</th>
+
+</tr>
+
+
+<tr>
+
+<td>
+Room 301
+</td>
+
+<td>
+AC not cooling
+</td>
+
+<td>
+Ravi Kumar
+</td>
+
+<td>
+High
+</td>
+
+<td>
+
+<span class="tag bad">
+In Progress
+</span>
+
+</td>
+
+<td>
+
+<button
+class="action"
+onclick="cycleMaintenance(this)"
+>
+Status
+</button>
+
+</td>
+
+</tr>
+
+
+<tr>
+
+<td>
+Lobby
+</td>
+
+<td>
+Light replacement
+</td>
+
+<td>
+Maintenance Team
+</td>
+
+<td>
+Normal
+</td>
+
+<td>
+
+<span class="tag warn">
+Reported
+</span>
+
+</td>
+
+<td>
+
+<button
+class="action"
+onclick="cycleMaintenance(this)"
+>
+Status
+</button>
+
+</td>
+
+</tr>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- GUEST REQUESTS -->
+
+<div id="requestsPage" class="page hidden">
+
+<div class="panel">
+
+<div class="panelhead">
+
+<h2>
+Guest Requests
+</h2>
+
+<button
+class="primary"
+onclick="newRequest()"
+>
++ Add Request
+</button>
+
+</div>
+
+
+<div class="tablewrap">
+
+<table id="requestTable">
+
+<tr>
+
+<th>Room</th>
+<th>Request</th>
+<th>Assigned Staff</th>
+<th>Priority</th>
+<th>Status</th>
+<th>Action</th>
+
+</tr>
+
+
+<tr>
+
+<td>
+203
+</td>
+
+<td>
+Extra towels
+</td>
+
+<td>
+Neha Singh
+</td>
+
+<td>
+Normal
+</td>
+
+<td>
+
+<span class="tag warn">
+Pending
+</span>
+
+</td>
+
+<td>
+
+<button
+class="action"
+onclick="cycleRequest(this)"
+>
+Complete
+</button>
+
+</td>
+
+</tr>
+
+
+<tr>
+
+<td>
+105
+</td>
+
+<td>
+Room service
+</td>
+
+<td>
+Reception
+</td>
+
+<td>
+High
+</td>
+
+<td>
+
+<span class="tag good">
+Completed
+</span>
+
+</td>
+
+<td>
+—
+</td>
+
+</tr>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- INVENTORY -->
+
+<div id="inventoryPage" class="page hidden">
+
+<div class="panel">
+
+<h2>
+Hotel Inventory
+</h2>
+
+<br>
+
+<div class="tablewrap">
+
+<table>
+
+<tr>
+
+<th>Item</th>
+<th>Category</th>
+<th>Stock</th>
+<th>Minimum</th>
+<th>Status</th>
+
+</tr>
+
+
+<tr>
+<td>Water Bottles</td>
+<td>Food & Beverage</td>
+<td>6</td>
+<td>20</td>
+<td class="bad">Low</td>
+</tr>
+
+
+<tr>
+<td>Bath Towels</td>
+<td>Linen</td>
+<td>45</td>
+<td>15</td>
+<td class="good">Good</td>
+</tr>
+
+
+<tr>
+<td>Bedsheets</td>
+<td>Linen</td>
+<td>32</td>
+<td>20</td>
+<td class="good">Good</td>
+</tr>
+
+
+<tr>
+<td>Shampoo</td>
+<td>Toiletries</td>
+<td>8</td>
+<td>15</td>
+<td class="bad">Low</td>
+</tr>
+
+
+<tr>
+<td>LED Bulbs</td>
+<td>Electronics</td>
+<td>4</td>
+<td>10</td>
+<td class="bad">Low</td>
+</tr>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- SALARY -->
+
+<div id="salaryPage" class="page hidden">
+
+<div class="panel">
+
+<h2>
+Salary Management
+</h2>
+
+<br>
+
+<div class="tablewrap">
+
+<table>
+
+<tr>
+
+<th>Employee</th>
+<th>Role</th>
+<th>Salary</th>
+<th>Month</th>
+<th>Status</th>
+<th>Action</th>
+
+</tr>
+
+
+<tr>
+
+<td>
+Rahul Kumar
+</td>
+
+<td>
+Receptionist
+</td>
+
+<td>
+₹22,000
+</td>
+
+<td>
+August
+</td>
+
+<td class="good">
+Paid
+</td>
+
+<td>
+—
+</td>
+
+</tr>
+
+
+<tr>
+
+<td>
+Neha Singh
+</td>
+
+<td>
+Housekeeping
+</td>
+
+<td>
+₹18,000
+</td>
+
+<td>
+August
+</td>
+
+<td
+id="salaryStatus"
+class="bad"
+>
+Pending
+</td>
+
+<td>
+
+<button
+class="action"
+onclick="paid()"
+>
+Mark Paid
+</button>
+
+</td>
+
+</tr>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- ORDERS -->
+
+<div id="ordersPage" class="page hidden">
+
+<div class="panel">
+
+<div class="panelhead">
+
+<h2>
+Hotel Orders
+</h2>
+
+<button
+class="primary"
+onclick="openM('orderModal')"
+>
++ Create Order
+</button>
+
+</div>
+
+
+<p style="color:#666;margin-bottom:20px">
+
+Purchase food, beverages, towels, bedsheets,
+cleaning products, electronics and other hotel requirements.
+
+</p>
+
+
+<div class="shopgrid">
+
+
+<div class="shopcard">
+
+<h3>
+🍽️ Food & Beverages
+</h3>
+
+<p>
+Kitchen supplies, water and drinks.
+</p>
+
+<button
+class="primary"
+onclick="orderCat('Food & Beverages')"
+>
+Order
+</button>
+
+</div>
+
+
+<div class="shopcard">
+
+<h3>
+🛏️ Linen
+</h3>
+
+<p>
+Towels, bedsheets and pillow covers.
+</p>
+
+<button
+class="primary"
+onclick="orderCat('Towels & Bedsheets')"
+>
+Order
+</button>
+
+</div>
+
+
+<div class="shopcard">
+
+<h3>
+💡 Electronics
+</h3>
+
+<p>
+Bulbs, switches and hotel electronics.
+</p>
+
+<button
+class="primary"
+onclick="orderCat('Electronics')"
+>
+Order
+</button>
+
+</div>
+
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- SUPPLIERS -->
+
+<div id="suppliersPage" class="page hidden">
+
+<div class="panel">
+
+<div class="panelhead">
+
+<h2>
+Supplier / Salesman Contacts
+</h2>
+
+<button
+class="primary"
+onclick="openM('supplierModal')"
+>
++ Save Contact
+</button>
+
+</div>
+
+
+<div class="tablewrap">
+
+<table id="supplierTable">
+
+<tr>
+
+<th>Company</th>
+<th>Category</th>
+<th>Person</th>
+<th>Phone</th>
+<th>Action</th>
+
+</tr>
+
+
+<tr>
+
+<td>
+ABC Water
+</td>
+
+<td>
+Drinking Water
+</td>
+
+<td>
+Raj
+</td>
+
+<td>
+98765XXXXX
+</td>
+
+<td>
+
+<button
+class="action"
+onclick="demoCall('ABC Water')"
+>
+Call
+</button>
+
+</td>
+
+</tr>
+
+
+<tr>
+
+<td>
+Hotel Linen House
+</td>
+
+<td>
+Linen
+</td>
+
+<td>
+Aman
+</td>
+
+<td>
+98764XXXXX
+</td>
+
+<td>
+
+<button
+class="action"
+onclick="demoCall('Hotel Linen House')"
+>
+Call
+</button>
+
+</td>
+
+</tr>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- SHOP -->
+
+<div id="shopPage" class="page hidden">
+
+<div class="panel">
+
+<div class="panelhead">
+
+<h2>
+🏪 Shop Management
+</h2>
+
+<button
+class="primary"
+onclick="openM('productModal')"
+>
++ Add Product
+</button>
+
+</div>
+
+
+<div class="stats">
+
+
+<div class="stat">
+
+<small>
+Shop Staff
+</small>
+
+<h2 id="shopCount">
+2
+</h2>
+
+</div>
+
+
+<div class="stat">
+
+<small>
+Products
+</small>
+
+<h2 id="productCount">
+5
+</h2>
+
+</div>
+
+
+<div class="stat">
+
+<small>
+Low Stock
+</small>
+
+<h2 id="shopLow">
+2
+</h2>
+
+</div>
+
+
+</div>
+
+
+<h3>
+Shop Staff
+</h3>
+
+<br>
+
+
+<div class="tablewrap">
+
+<table id="shopStaffTable">
+
+<tr>
+
+<th>Name</th>
+<th>Role</th>
+<th>Shift</th>
+<th>Duty</th>
+<th>Status</th>
+
+</tr>
+
+
+<tr>
+
+<td>Rohit</td>
+<td>Shop Staff</td>
+<td>Morning</td>
+<td>Counter</td>
+<td class="good">Active</td>
+
+</tr>
+
+
+<tr>
+
+<td>Priya</td>
+<td>Shop Staff</td>
+<td>Evening</td>
+<td>Stock & Counter</td>
+<td class="good">Active</td>
+
+</tr>
+
+</table>
+
+</div>
+
+
+<br>
+
+<h3>
+Shop Inventory
+</h3>
+
+<br>
+
+
+<div class="tablewrap">
+
+<table id="productTable">
+
+<tr>
+
+<th>Product</th>
+<th>Category</th>
+<th>Price</th>
+<th>Stock</th>
+<th>Minimum</th>
+<th>Status</th>
+
+</tr>
+
+
+<tr>
+<td>Water Bottle</td>
+<td>Beverage</td>
+<td>₹30</td>
+<td>8</td>
+<td>20</td>
+<td class="bad">Low</td>
+</tr>
+
+
+<tr>
+<td>Chips</td>
+<td>Snacks</td>
+<td>₹30</td>
+<td>35</td>
+<td>10</td>
+<td class="good">Good</td>
+</tr>
+
+
+<tr>
+<td>Juice</td>
+<td>Beverage</td>
+<td>₹60</td>
+<td>6</td>
+<td>10</td>
+<td class="bad">Low</td>
+</tr>
+
+
+<tr>
+<td>Biscuits</td>
+<td>Snacks</td>
+<td>₹30</td>
+<td>25</td>
+<td>10</td>
+<td class="good">Good</td>
+</tr>
+
+
+<tr>
+<td>Toiletry Kit</td>
+<td>Daily Use</td>
+<td>₹80</td>
+<td>20</td>
+<td>8</td>
+<td class="good">Good</td>
+</tr>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- SHOP FEEDBACK -->
+
+<div id="shopFeedbackPage" class="page hidden">
+
+<div class="panel">
+
+<h2>
+⭐ Shop Customer Feedback
+</h2>
+
+<p style="color:#666;margin:8px 0 20px">
+
+Collect customer ideas about what the shop should add next.
+
+</p>
+
+
+<div class="field">
+
+<label>
+Customer Name
+</label>
+
+<input id="shopFbName">
+
+</div>
+
+
+<div class="field">
+
+<label>
+What should we add to the shop?
+</label>
+
+<input
+id="shopSuggestion"
+placeholder="Example: Ice cream, travel adapters..."
+>
+
+</div>
+
+
+<div class="field">
+
+<label>
+Feedback
+</label>
+
+<textarea id="shopFbText"></textarea>
+
+</div>
+
+
+<button
+class="primary"
+onclick="shopFeedback()"
+>
+
+Save Customer Feedback
+
+</button>
+
+
+<br>
+<br>
+
+
+<h3>
+Recent Suggestions
+</h3>
+
+
+<div
+id="suggestions"
+style="margin-top:15px"
+>
+
+<div class="card">
+
+<b>
+Demo Customer
+</b>
+
+<p>
+“Please add ice cream and cold coffee.”
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+</main>
+
+</div>
+
+</div>
+
+
+<!-- ================= JAVASCRIPT ================= -->
+
+<script>
+
+let rating=0;
+let photoData="";
+
+
+/* LANDING NAVIGATION */
+
+function go(id){
+
+    document
+    .getElementById(id)
+    .scrollIntoView({
+        behavior:"smooth"
+    });
+
+}
+
+
+/* AUTH */
+
+function auth(type){
+
+    document
+    .getElementById("authModal")
+    .classList.add("open");
+
+    document
+    .getElementById("signup")
+    .classList
+    .toggle("hidden",type==="in");
+
+    document
+    .getElementById("signin")
+    .classList
+    .toggle("hidden",type!=="in");
+
+}
+
+
+/* MODALS */
+
+function openM(id){
+
+    document
+    .getElementById(id)
+    .classList
+    .add("open");
+
+}
+
+
+function closeM(id){
+
+    document
+    .getElementById(id)
+    .classList
+    .remove("open");
+
+}
+
+
+/* SIGNUP */
+
+function signup(){
+
+    const vals=[
+        "hotel",
+        "manager",
+        "mobile",
+        "email",
+        "address",
+        "city",
+        "rooms",
+        "pass",
+        "pass2"
+    ]
+    .map(
+        id=>document.getElementById(id).value.trim()
+    );
+
+
+    if(vals.some(v=>!v)){
+
+        alert("Please fill all required details.");
+
+        return;
+
+    }
+
+
+    if(vals[7]!==vals[8]){
+
+        alert("Passwords do not match.");
+
+        return;
+
+    }
+
+
+    const id=
+    "GS-"+
+    Math.floor(
+        1000+
+        Math.random()*9000
+    );
+
+
+    localStorage.setItem(
+        "hotelData",
+        JSON.stringify({
+
+            hotel:vals[0],
+            manager:vals[1],
+            mobile:vals[2],
+            email:vals[3],
+            rooms:vals[6],
+            pass:vals[7],
+            id:id
+
+        })
+    );
+
+
+    alert(
+        "Demo account created!\n"+
+        "Your Hotel ID: "+id
+    );
+
+
+    closeM("authModal");
+
+    openDashboard();
+
+}
+
+
+/* SIGNIN */
+
+function signin(){
+
+    const d=
+    JSON.parse(
+        localStorage.getItem("hotelData")||"null"
+    );
+
+
+    if(!d){
+
+        if(
+            !document
+            .getElementById("loginId")
+            .value
+        ){
+
+            alert(
+                "Enter demo login details."
+            );
+
+            return;
+
+        }
+
+
+        alert(
+            "Demo login successful."
+        );
+
+        closeM("authModal");
+
+        openDashboard();
+
+        return;
+
+    }
+
+
+    if(
+
+        document
+        .getElementById("loginId")
+        .value===d.id
+
+        &&
+
+        (
+
+            document
+            .getElementById("loginUser")
+            .value===d.email
+
+            ||
+
+            document
+            .getElementById("loginUser")
+            .value===d.mobile
+
+        )
+
+        &&
+
+        document
+        .getElementById("loginPass")
+        .value===d.pass
+
+    ){
+
+        closeM("authModal");
+
+        openDashboard();
+
+    }
+
+    else{
+
+        alert(
+            "Invalid login details."
+        );
+
+    }
+
+}
+
+
+/* OPEN DASHBOARD */
+
+function openDashboard(){
+
+    document
+    .getElementById("landing")
+    .classList
+    .add("hidden");
+
+
+    document
+    .getElementById("dashboard")
+    .classList
+    .remove("hidden");
+
+
+    let d=
+    JSON.parse(
+        localStorage.getItem("hotelData")||"{}"
+    );
+
+
+    document
+    .getElementById("welcome")
+    .textContent=
+
+        (d.hotel?
+        d.hotel+" • ":"")+
+
+        "Welcome back, "+
+
+        (d.manager||"Manager");
+
+
+    if(d.rooms){
+
+        document
+        .getElementById("statRooms")
+        .textContent=d.rooms;
+
+    }
+
+}
+
+
+/* LOGOUT */
+
+function logout(){
+
+    document
+    .getElementById("dashboard")
+    .classList
+    .add("hidden");
+
+
+    document
+    .getElementById("landing")
+    .classList
+    .remove("hidden");
+
+
+    scrollTo(0,0);
+
+}
+
+
+/* DASHBOARD PAGES */
+
+function page(id,btn){
+
+    document
+    .querySelectorAll(".page")
+    .forEach(
+        x=>x.classList.add("hidden")
+    );
+
+
+    document
+    .getElementById(id)
+    .classList
+    .remove("hidden");
+
+
+    document
+    .querySelectorAll(".side button")
+    .forEach(
+        x=>x.classList.remove("active")
+    );
+
+
+    btn.classList.add("active");
+
+
+    let t={
+
+        overview:"Dashboard",
+
+        roomsPage:"Room Management",
+
+        staffPage:"Staff Management",
+
+        housePage:"Housekeeping",
+
+        inventoryPage:"Hotel Inventory",
+
+        salaryPage:"Salary Management",
+
+        ordersPage:"Hotel Orders",
+
+        suppliersPage:"Supplier Contacts",
+
+        shopPage:"Shop Management",
+
+        shopFeedbackPage:"Shop Customer Feedback",
+
+        bookingsPage:"Booking Management",
+
+        maintenancePage:"Maintenance",
+
+        requestsPage:"Guest Requests"
+
+    };
+
+
+    document
+    .getElementById("title")
+    .textContent=t[id];
+
+}
+
+
+/* RATING */
+
+function rate(n){
+
+    rating=n;
+
+
+    document
+    .querySelectorAll("#stars button")
+    .forEach(
+        (b,i)=>
+        b.classList.toggle(
+            "sel",
+            i<n
+        )
+    );
+
+}
+
+
+/* FEEDBACK */
+
+function feedback(){
+
+    if(
+
+        !document
+        .getElementById("fbName")
+        .value
+
+        ||
+
+        !document
+        .getElementById("fbText")
+        .value
+
+        ||
+
+        !rating
+
+    ){
+
+        alert(
+            "Please fill feedback and rating."
+        );
+
+        return;
+
+    }
+
+
+    alert(
+        "Thank you for your feedback!"
+    );
+
+
+    document
+    .getElementById("fbName")
+    .value="";
+
+
+    document
+    .getElementById("fbText")
+    .value="";
+
+}
+
+
+/* ROOM STATUS */
+
+function changeStatus(b){
+
+    let s=
+    b.parentElement
+    .previousElementSibling
+    .querySelector(".tag");
+
+
+    let a=[
+
+        ["Available","good"],
+
+        ["Occupied","bad"],
+
+        ["Cleaning","warn"],
+
+        ["Maintenance","muted"]
+
+    ];
+
+
+    let i=
+    a.findIndex(
+        x=>x[0]===s.textContent.trim()
+    );
+
+
+    i=(i+1)%a.length;
+
+
+    s.textContent=a[i][0];
+
+    s.className=
+    "tag "+a[i][1];
+
+}
+
+
+/* ROOM PRICE */
+
+function changePrice(b){
+
+    let c=
+    b.parentElement
+    .parentElement
+    .children[3];
+
+
+    let v=
+    prompt(
+        "New room price",
+        c.textContent.replace("₹","")
+    );
+
+
+    if(
+        v &&
+        !isNaN(v)
+    ){
+
+        c.textContent="₹"+v;
+
+    }
+
+}
+
+
+/* ADD ROOM */
+
+function addRoom(){
+
+    let n=rno.value;
+    let t=rtype.value;
+    let f=rfloor.value;
+    let p=rprice.value;
+
+
+    if(
+        !n ||
+        !f ||
+        !p
+    ){
+
+        alert(
+            "Fill room details."
+        );
+
+        return;
+
+    }
+
+
+    let tr=
+    document
+    .getElementById("roomTable")
+    .insertRow(-1);
+
+
+    tr.innerHTML=`
+
+        <td>${n}</td>
+
+        <td>${t}</td>
+
+        <td>${f}</td>
+
+        <td>₹${p}</td>
+
+        <td>
+            <span class="tag good">
+                Available
+            </span>
+        </td>
+
+        <td>
+
+            <button
+            class="action"
+            onclick="changeStatus(this)"
+            >
+            Status
+            </button>
+
+            <button
+            class="action"
+            onclick="changePrice(this)"
+            >
+            Price
+            </button>
+
+            <button
+            class="action"
+            onclick="deleteRow(this)"
+            >
+            Delete
+            </button>
+
+        </td>
+
+    `;
+
+
+    document
+    .getElementById("statRooms")
+    .textContent=
+
+    +document
+    .getElementById("statRooms")
+    .textContent+1;
+
+
+    closeM("roomModal");
+
+
+    alert(
+        "Room added."
+    );
+
+}
+
+
+/* PHOTO PREVIEW */
+
+function previewPhoto(input){
+
+    if(input.files[0]){
+
+        let r=new FileReader();
+
+
+        r.onload=e=>{
+
+            photoData=e.target.result;
+
+
+            preview.src=
+            photoData;
+
+
+            preview
+            .classList
+            .remove("hidden");
+
+        };
+
+
+        r.readAsDataURL(
+            input.files[0]
+        );
+
+    }
+
+}
+
+
+/* ADD STAFF */
+
+function addStaff(){
+
+    if(
+        !sname.value ||
+        !sphone.value ||
+        !sduty.value ||
+        !ssalary.value
+    ){
+
+        alert(
+            "Fill staff details."
+        );
+
+        return;
+
+    }
+
+
+    let img=
+    photoData ||
+
+    "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=600&q=80";
+
+
+    document
+    .getElementById("staffGrid")
+    .insertAdjacentHTML(
+
+        "beforeend",
+
+        `
+
+        <div class="staffcard">
+
+            <img src="${img}">
+
+            <div class="staffinfo">
+
+                <h3>
+                    ${sname.value}
+                </h3>
+
+                <p>
+                    <b>Role:</b>
+                    ${srole.value}
+                </p>
+
+                <p>
+                    <b>Phone:</b>
+                    ${sphone.value}
+                </p>
+
+                <p>
+                    <b>Shift:</b>
+                    ${sshift.value}
+                </p>
+
+                <p>
+                    <b>Duty:</b>
+                    ${sduty.value}
+                </p>
+
+                <p>
+                    <b>Salary:</b>
+                    ₹${ssalary.value}
+                </p>
+
+                <span class="tag good">
+                    Active
+                </span>
+
+                <br>
+
+                <button
+                class="action"
+                onclick="editStaff(this)"
+                >
+                Edit
+                </button>
+
+                <button
+                class="action"
+                onclick="deleteStaff(this)"
+                >
+                Delete
+                </button>
+
+            </div>
+
+        </div>
+
+        `
+
+    );
+
+
+    document
+    .getElementById("statStaff")
+    .textContent=
+
+    +document
+    .getElementById("statStaff")
+    .textContent+1;
+
+
+    photoData="";
+
+
+    closeM("staffModal");
+
+
+    alert(
+        "Staff added successfully."
+    );
+
+}
+
+
+/* SALARY */
+
+function paid(){
+
+    let s=
+    document
+    .getElementById("salaryStatus");
+
+
+    s.textContent="Paid";
+
+    s.className="good";
+
+
+    alert(
+        "Salary marked as paid."
+    );
+
+}
+
+
+/* SUPPLIER */
+
+function addSupplier(){
+
+    if(
+        !supname.value ||
+        !supperson.value ||
+        !supphone.value
+    ){
+
+        alert(
+            "Fill supplier details."
+        );
+
+        return;
+
+    }
+
+
+    document
+    .getElementById("supplierTable")
+    .insertRow(-1)
+    .innerHTML=`
+
+        <td>
+            ${supname.value}
+        </td>
+
+        <td>
+            ${supcat.value}
+        </td>
+
+        <td>
+            ${supperson.value}
+        </td>
+
+        <td>
+            ${supphone.value}
+        </td>
+
+        <td>
+
+            <button
+            class="action"
+            onclick="demoCall('${supname.value}')"
+            >
+            Call
+            </button>
+
+        </td>
+
+    `;
+
+
+    closeM("supplierModal");
+
+
+    alert(
+        "Supplier contact saved."
+    );
+
+}
+
+
+function demoCall(n){
+
+    alert(
+        "Demo call to "+n
+    );
+
+}
+
+
+/* ORDER CATEGORY */
+
+function orderCat(c){
+
+    ordercat.value=c;
+
+    openM("orderModal");
+
+}
+
+
+/* CREATE ORDER */
+
+function createOrder(){
+
+    if(
+        !orderitem.value ||
+        !orderqty.value
+    ){
+
+        alert(
+            "Enter item and quantity."
+        );
+
+        return;
+
+    }
+
+
+    alert(
+
+        "Demo order created!\n\n"+
+
+        "Item: "+orderitem.value+"\n"+
+
+        "Category: "+ordercat.value+"\n"+
+
+        "Supplier: "+ordersup.value+"\n"+
+
+        "Quantity: "+orderqty.value
+
+    );
+
+
+    closeM("orderModal");
+
+}
+
+
+/* ADD SHOP PRODUCT */
+
+function addProduct(){
+
+    if(
+        !pname.value ||
+        !pprice.value ||
+        !pstock.value
+    ){
+
+        alert(
+            "Fill product details."
+        );
+
+        return;
+
+    }
+
+
+    let low=
+    +pstock.value <=
+    (+pmin.value||0);
+
+
+    document
+    .getElementById("productTable")
+    .insertRow(-1)
+    .innerHTML=`
+
+        <td>
+            ${pname.value}
+        </td>
+
+        <td>
+            ${pcat.value}
+        </td>
+
+        <td>
+            ₹${pprice.value}
+        </td>
+
+        <td>
+            ${pstock.value}
+        </td>
+
+        <td>
+            ${pmin.value||0}
+        </td>
+
+        <td
+        class="${low?'bad':'good'}"
+        >
+            ${low?'Low':'Good'}
+        </td>
+
+    `;
+
+
+    document
+    .getElementById("productCount")
+    .textContent=
+
+    +document
+    .getElementById("productCount")
+    .textContent+1;
+
+
+    closeM("productModal");
+
+
+    alert(
+        "Shop product added."
+    );
+
+}
+
+
+/* SHOP FEEDBACK */
+
+function shopFeedback(){
+
+    if(
+        !shopFbName.value ||
+        !shopSuggestion.value
+    ){
+
+        alert(
+            "Enter customer name and suggestion."
+        );
+
+        return;
+
+    }
+
+
+    document
+    .getElementById("suggestions")
+    .insertAdjacentHTML(
+
+        "afterbegin",
+
+        `
+
+        <div
+        class="card"
+        style="margin-bottom:10px"
+        >
+
+            <b>
+                ${shopFbName.value}
+            </b>
+
+            <p>
+                Suggestion:
+                ${shopSuggestion.value}
+            </p>
+
+            <p>
+                ${shopFbText.value}
+            </p>
+
+        </div>
+
+        `
+
+    );
+
+
+    shopFbName.value="";
+    shopSuggestion.value="";
+    shopFbText.value="";
+
+
+    alert(
+        "Shop customer feedback saved."
+    );
+
+}
+
+
+/* SAVE STATE */
+
+function saveState(){
+
+    const state={
+
+        roomRows:
+
+        [
+            ...document
+            .querySelectorAll(
+                "#roomTable tr"
+            )
+        ]
+        .slice(1)
+        .map(
+
+            r=>
+            [...r.children]
+            .slice(0,5)
+            .map(
+                c=>c.innerText.trim()
+            )
+
+        ),
+
+
+        staff:
+
+        [
+            ...document
+            .querySelectorAll(
+                "#staffGrid .staffcard"
+            )
+        ]
+        .map(
+
+            c=>({
+
+                img:
+                c.querySelector("img")?.src||"",
+
+                html:
+                c.querySelector(
+                    ".staffinfo"
+                )?.innerHTML||""
+
+            })
+
+        ),
+
+
+        productRows:
+
+        [
+            ...document
+            .querySelectorAll(
+                "#productTable tr"
+            )
+        ]
+        .slice(1)
+        .map(
+
+            r=>
+            [...r.children]
+            .slice(0,6)
+            .map(
+                c=>c.innerText.trim()
+            )
+
+        )
+
+    };
+
+
+    localStorage.setItem(
+        "r3_state",
+        JSON.stringify(state)
+    );
+
+}
+
+
+/* RESTORE STATE */
+
+function restoreState(){
+
+    const raw=
+    localStorage.getItem(
+        "r3_state"
+    );
+
+
+    if(!raw)return;
+
+
+    try{
+
+        const s=
+        JSON.parse(raw);
+
+
+        /* ROOMS */
+
+        if(
+            s.roomRows?.length
+        ){
+
+            const table=
+            document
+            .getElementById(
+                "roomTable"
+            );
+
+
+            while(
+                table.rows.length>1
+            ){
+
+                table.deleteRow(1);
+
+            }
+
+
+            s.roomRows.forEach(x=>{
+
+                let tr=
+                table.insertRow(-1);
+
+
+                tr.innerHTML=`
+
+                    <td>${x[0]}</td>
+
+                    <td>${x[1]}</td>
+
+                    <td>${x[2]}</td>
+
+                    <td>${x[3]}</td>
+
+                    <td>
+
+                        <span class="tag good">
+                            ${x[4]}
+                        </span>
+
+                    </td>
+
+                    <td>
+
+                        <button
+                        class="action"
+                        onclick="changeStatus(this)"
+                        >
+                        Status
+                        </button>
+
+                        <button
+                        class="action"
+                        onclick="changePrice(this)"
+                        >
+                        Price
+                        </button>
+
+                        <button
+                        class="action"
+                        onclick="deleteRow(this)"
+                        >
+                        Delete
+                        </button>
+
+                    </td>
+
+                `;
+
+            });
+
+
+            document
+            .getElementById("statRooms")
+            .textContent=
+            table.rows.length-1;
+
+        }
+
+
+        /* STAFF */
+
+        if(
+            s.staff?.length
+        ){
+
+            const g=
+            document
+            .getElementById(
+                "staffGrid"
+            );
+
+
+            g.innerHTML="";
+
+
+            s.staff.forEach(x=>{
+
+                g.insertAdjacentHTML(
+
+                    "beforeend",
+
+                    `
+
+                    <div class="staffcard">
+
+                        <img src="${x.img}">
+
+                        <div class="staffinfo">
+
+                            ${x.html}
+
+                        </div>
+
+                    </div>
+
+                    `
+
+                );
+
+            });
+
+
+            document
+            .getElementById("statStaff")
+            .textContent=
+            s.staff.length;
+
+        }
+
+
+        /* PRODUCTS */
+
+        if(
+            s.productRows?.length
+        ){
+
+            const table=
+            document
+            .getElementById(
+                "productTable"
+            );
+
+
+            while(
+                table.rows.length>1
+            ){
+
+                table.deleteRow(1);
+
+            }
+
+
+            s.productRows.forEach(x=>{
+
+                let tr=
+                table.insertRow(-1);
+
+
+                tr.innerHTML=`
+
+                    <td>${x[0]}</td>
+
+                    <td>${x[1]}</td>
+
+                    <td>${x[2]}</td>
+
+                    <td>${x[3]}</td>
+
+                    <td>${x[4]}</td>
+
+                    <td
+                    class="${x[5]==='Low'?'bad':'good'}"
+                    >
+                        ${x[5]}
+                    </td>
+
+                `;
+
+            });
+
+
+            document
+            .getElementById("productCount")
+            .textContent=
+            table.rows.length-1;
+
+        }
+
+
+    }
+
+    catch(e){
+
+        console.log(
+            "Demo state could not be restored",
+            e
+        );
+
+    }
+
+}
+
+
+/* DELETE TABLE ROW */
+
+function deleteRow(btn){
+
+    if(
+        confirm(
+            "Delete this entry?"
+        )
+    ){
+
+        btn
+        .closest("tr")
+        .remove();
+
+
+        saveState();
+
+    }
+
+}
+
+
+/* EDIT STAFF */
+
+function editStaff(btn){
+
+    const card=
+    btn.closest(".staffcard");
+
+
+    const name=
+    card.querySelector("h3");
+
+
+    const newName=
+    prompt(
+        "Edit staff name",
+        name.innerText
+    );
+
+
+    if(
+        newName &&
+        newName.trim()
+    ){
+
+        name.innerText=
+        newName.trim();
+
+
+        saveState();
+
+    }
+
+}
+
+
+/* DELETE STAFF */
+
+function deleteStaff(btn){
+
+    if(
+        confirm(
+            "Remove this staff member?"
+        )
+    ){
+
+        btn
+        .closest(".staffcard")
+        .remove();
+
+
+        document
+        .getElementById("statStaff")
+        .textContent=
+
+        Math.max(
+
+            0,
+
+            document
+            .querySelectorAll(
+                "#staffGrid .staffcard"
+            )
+            .length
+
+        );
+
+
+        saveState();
+
+    }
+
+}
+
+
+/* NEW BOOKING */
+
+function newBooking(){
+
+    let guest=
+    prompt(
+        "Guest name"
+    );
+
+    if(!guest)return;
+
+
+    let room=
+    prompt(
+        "Room number"
+    );
+
+    if(!room)return;
+
+
+    let ci=
+    prompt(
+        "Check-in date"
+    );
+
+    if(!ci)return;
+
+
+    let co=
+    prompt(
+        "Check-out date"
+    );
+
+    if(!co)return;
+
+
+    let guests=
+    prompt(
+        "Number of guests",
+        "2"
+    )||"1";
+
+
+    let tr=
+    document
+    .getElementById(
+        "bookingTable"
+    )
+    .insertRow(-1);
+
+
+    tr.innerHTML=`
+
+        <td>${guest}</td>
+
+        <td>${room}</td>
+
+        <td>${ci}</td>
+
+        <td>${co}</td>
+
+        <td>${guests}</td>
+
+        <td>
+
+            <span class="tag warn">
+                Reserved
+            </span>
+
+        </td>
+
+        <td>
+
+            <button
+            class="action"
+            onclick="cycleBooking(this)"
+            >
+            Status
+            </button>
+
+            <button
+            class="action"
+            onclick="deleteRow(this)"
+            >
+            Delete
+            </button>
+
+        </td>
+
+    `;
+
+
+    saveState();
+
+
+    alert(
+        "Demo booking created."
+    );
+
+}
+
+
+/* BOOKING STATUS */
+
+function cycleBooking(btn){
+
+    let s=
+    btn.parentElement
+    .parentElement
+    .querySelector(".tag");
+
+
+    let states=[
+
+        ["Reserved","warn"],
+
+        ["Checked-in","good"],
+
+        ["Checked-out","muted"],
+
+        ["Cancelled","bad"]
+
+    ];
+
+
+    let i=
+    states.findIndex(
+        x=>x[0]===s.innerText.trim()
+    );
+
+
+    i=(i+1)%states.length;
+
+
+    s.innerText=
+    states[i][0];
+
+
+    s.className=
+    "tag "+states[i][1];
+
+
+    saveState();
+
+}
+
+
+/* NEW MAINTENANCE */
+
+function newMaintenance(){
+
+    let area=
+    prompt(
+        "Room / Area"
+    );
+
+    if(!area)return;
+
+
+    let issue=
+    prompt(
+        "Issue"
+    );
+
+    if(!issue)return;
+
+
+    let staff=
+    prompt(
+        "Assigned staff",
+        "Maintenance Team"
+    );
+
+
+    let priority=
+    prompt(
+        "Priority",
+        "Normal"
+    );
+
+
+    let tr=
+    document
+    .getElementById(
+        "maintenanceTable"
+    )
+    .insertRow(-1);
+
+
+    tr.innerHTML=`
+
+        <td>${area}</td>
+
+        <td>${issue}</td>
+
+        <td>${staff}</td>
+
+        <td>${priority}</td>
+
+        <td>
+
+            <span class="tag warn">
+                Reported
+            </span>
+
+        </td>
+
+        <td>
+
+            <button
+            class="action"
+            onclick="cycleMaintenance(this)"
+            >
+            Status
+            </button>
+
+            <button
+            class="action"
+            onclick="deleteRow(this)"
+            >
+            Delete
+            </button>
+
+        </td>
+
+    `;
+
+
+    saveState();
+
+}
+
+
+/* MAINTENANCE STATUS */
+
+function cycleMaintenance(btn){
+
+    let s=
+    btn.parentElement
+    .parentElement
+    .querySelector(".tag");
+
+
+    let states=[
+
+        ["Reported","warn"],
+
+        ["In Progress","bad"],
+
+        ["Fixed","good"]
+
+    ];
+
+
+    let i=
+    states.findIndex(
+        x=>x[0]===s.innerText.trim()
+    );
+
+
+    i=(i+1)%states.length;
+
+
+    s.innerText=
+    states[i][0];
+
+
+    s.className=
+    "tag "+states[i][1];
+
+
+    saveState();
+
+}
+
+
+/* NEW REQUEST */
+
+function newRequest(){
+
+    let room=
+    prompt(
+        "Room number"
+    );
+
+    if(!room)return;
+
+
+    let req=
+    prompt(
+        "Guest request"
+    );
+
+    if(!req)return;
+
+
+    let staff=
+    prompt(
+        "Assigned staff",
+        "Reception"
+    );
+
+
+    let priority=
+    prompt(
+        "Priority",
+        "Normal"
+    );
+
+
+    let tr=
+    document
+    .getElementById(
+        "requestTable"
+    )
+    .insertRow(-1);
+
+
+    tr.innerHTML=`
+
+        <td>${room}</td>
+
+        <td>${req}</td>
+
+        <td>${staff}</td>
+
+        <td>${priority}</td>
+
+        <td>
+
+            <span class="tag warn">
+                Pending
+            </span>
+
+        </td>
+
+        <td>
+
+            <button
+            class="action"
+            onclick="cycleRequest(this)"
+            >
+            Complete
+            </button>
+
+            <button
+            class="action"
+            onclick="deleteRow(this)"
+            >
+            Delete
+            </button>
+
+        </td>
+
+    `;
+
+
+    saveState();
+
+}
+
+
+/* REQUEST STATUS */
+
+function cycleRequest(btn){
+
+    let s=
+    btn.parentElement
+    .parentElement
+    .querySelector(".tag");
+
+
+    s.innerText=
+    "Completed";
+
+
+    s.className=
+    "tag good";
+
+
+    saveState();
+
+}
+
+
+/* LOAD SAVED DEMO DATA */
+
+window.addEventListener(
+    "load",
+    restoreState
+);
+
+</script>
+
+</body>
+</html>
